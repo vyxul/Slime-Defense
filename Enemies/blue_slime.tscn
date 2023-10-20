@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://6x8a4lsfa826"]
+
+[ext_resource type="Texture2D" uid="uid://prirf24n857l" path="res://Assets/Art/Enemies/BlueSlime.png" id="1_c7m7r"]
+[ext_resource type="Script" path="res://Enemies/blue_slime.gd" id="1_lvntx"]
+[ext_resource type="PackedScene" uid="uid://cit2cdkydlfww" path="res://Components/health_component.tscn" id="2_uak50"]
+[ext_resource type="PackedScene" uid="uid://bhatg6awsunwl" path="res://Components/hurtbox_component.tscn" id="3_sn1xb"]
+[ext_resource type="PackedScene" uid="uid://btdv6ffutib13" path="res://Components/hitbox_component.tscn" id="4_guffy"]
+[ext_resource type="PackedScene" uid="uid://cwergp0mb2m60" path="res://Components/attack_component.tscn" id="5_ifnfb"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ag5fx"]
+radius = 7.0
+height = 18.0
+
+[node name="BlueSlime" type="CharacterBody2D"]
+scale = Vector2(5, 5)
+collision_layer = 2
+collision_mask = 13
+script = ExtResource("1_lvntx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_c7m7r")
+hframes = 4
+vframes = 4
+
+[node name="Movement Collision" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ag5fx")
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_uak50")]
+maxHealthPoints = 1
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("3_sn1xb")]
+collision_layer = 2
+healthComponent = NodePath("../HealthComponent")
+
+[node name="Hurtbox Collision" type="CollisionShape2D" parent="HurtboxComponent"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ag5fx")
+debug_color = Color(0.972549, 0, 0.447059, 0.419608)
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("attackComponent") instance=ExtResource("4_guffy")]
+collision_layer = 2
+attackComponent = NodePath("../AttackComponent")
+
+[node name="Hitbox Collision" type="CollisionShape2D" parent="HitboxComponent"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ag5fx")
+debug_color = Color(0, 0.639216, 0.345098, 0.419608)
+
+[node name="AttackComponent" parent="." instance=ExtResource("5_ifnfb")]
+
+[connection signal="healthDepleted" from="HealthComponent" to="." method="_on_health_component_health_depleted"]

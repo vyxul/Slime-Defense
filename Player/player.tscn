@@ -1,0 +1,51 @@
+[gd_scene load_steps=10 format=3 uid="uid://ddvy5ge64ko5b"]
+
+[ext_resource type="Script" path="res://Player/player.gd" id="1_0qak4"]
+[ext_resource type="Texture2D" uid="uid://cslxbpcct7yp3" path="res://icon.svg" id="1_ubh0t"]
+[ext_resource type="PackedScene" uid="uid://bhatg6awsunwl" path="res://Components/hurtbox_component.tscn" id="4_45sbj"]
+[ext_resource type="PackedScene" uid="uid://cit2cdkydlfww" path="res://Components/health_component.tscn" id="4_unofr"]
+[ext_resource type="PackedScene" uid="uid://btdv6ffutib13" path="res://Components/hitbox_component.tscn" id="5_kk8m6"]
+[ext_resource type="PackedScene" uid="uid://cwergp0mb2m60" path="res://Components/attack_component.tscn" id="6_fwkbs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xqgbb"]
+size = Vector2(127.75, 128.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6fomp"]
+size = Vector2(128, 129)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_thkyo"]
+size = Vector2(42, 43)
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 14
+script = ExtResource("1_0qak4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ubh0t")
+
+[node name="Movement Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_xqgbb")
+
+[node name="HealthComponent" parent="." instance=ExtResource("4_unofr")]
+maxHealthPoints = 5
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("4_45sbj")]
+collision_mask = 2
+healthComponent = NodePath("../HealthComponent")
+
+[node name="Hurtbox Collision" type="CollisionShape2D" parent="HurtboxComponent"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_6fomp")
+debug_color = Color(0.992157, 0, 0.25098, 0.419608)
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("attackComponent") instance=ExtResource("5_kk8m6")]
+collision_mask = 2
+attackComponent = NodePath("../AttackComponent")
+
+[node name="Hitbox Collision" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(92, 0)
+shape = SubResource("RectangleShape2D_thkyo")
+debug_color = Color(0, 0.639216, 0.360784, 0.419608)
+
+[node name="AttackComponent" parent="." instance=ExtResource("6_fwkbs")]
+damage = 1
