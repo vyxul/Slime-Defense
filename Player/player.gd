@@ -1,17 +1,23 @@
 extends CharacterBody2D
 
+@export var shurikenMaxStacks: int
+@export var shurikenCooldown: int
+
 @onready var healthComponent = $HealthComponent
 @onready var hurtboxComponent = $HurtboxComponent
-@onready var hitboxComponent = $HitboxComponent
+@onready var weaponComponent = $WeaponComponent
+@onready var abilityComponent = $AbilityComponent
 
 var speed = 300.0
 var runSpeed = speed * 2
 var isRunning: bool = false
 var direction: String = "Down"
 var isAttacking: bool = false
+var attackOffset: int
 
 func _ready():
-	hitboxComponent.disable()
+	weaponComponent.disable()
+	abilityComponent.abilitySetUp(shurikenMaxStacks, shurikenCooldown)
 
 func handleInput():
 	# Get the input direction and handle the movement/deceleration.
@@ -33,22 +39,22 @@ func handleInput():
 		isRunning = false
 		
 	# Check if player is attacking
-	if (Input.is_action_just_pressed("leftClick")):
+	if (Input.is_action_pressed("leftClick")):
 		attack()
 		
 	# Just to easily debug
 	if (Input.is_action_just_pressed("rightClick")):
 		print_debug("----------------------")
+		
+	if (Input.is_action_just_pressed("q")):
+		shurikenAttack()
 
 # Just toggling attack on left click for now
 func attack():
-	if !isAttacking:
-		isAttacking = true
-		hitboxComponent.enable()
-		
-	else:
-		isAttacking = false
-		hitboxComponent.disable()
+	weaponComponent.attack()
+	
+func shurikenAttack():
+	abilityComponent.useAbility($Marker2D.position)
 
 func _physics_process(delta):
 	handleInput()

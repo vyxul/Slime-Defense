@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dms033k46qts4"]
+
+[ext_resource type="Texture2D" uid="uid://dreh2o1rlrdbd" path="res://Assets/Art/Weapons/Shuriken/shuriken spritesheet.png" id="1_5xo7k"]
+[ext_resource type="Script" path="res://Player/shuriken_gui.gd" id="1_rl6n5"]
+
+[node name="shurikenGUI" type="Panel"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(128, 128)
+offset_right = 128.0
+offset_bottom = 128.0
+script = ExtResource("1_rl6n5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_5xo7k")
+centered = false
+vframes = 2

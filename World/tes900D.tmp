@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://cavtemjiwo66w"]
+
+[ext_resource type="PackedScene" uid="uid://6x8a4lsfa826" path="res://Enemies/blue_slime.tscn" id="1_anlg5"]
+[ext_resource type="PackedScene" uid="uid://ddvy5ge64ko5b" path="res://Player/player.tscn" id="2_nj7hq"]
+
+[node name="TestLevel" type="Node2D"]
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="BlueSlime" parent="Enemies" instance=ExtResource("1_anlg5")]
+position = Vector2(559, 206)
+
+[node name="BlueSlime2" parent="Enemies" instance=ExtResource("1_anlg5")]
+position = Vector2(769, 210)
+
+[node name="BlueSlime3" parent="Enemies" instance=ExtResource("1_anlg5")]
+position = Vector2(991, 207)
+
+[node name="Player" type="Node" parent="."]
+
+[node name="Player" parent="Player" instance=ExtResource("2_nj7hq")]
+position = Vector2(202, 204)

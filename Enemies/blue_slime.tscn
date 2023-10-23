@@ -48,5 +48,6 @@ shape = SubResource("CapsuleShape2D_ag5fx")
 debug_color = Color(0, 0.639216, 0.345098, 0.419608)
 
 [node name="AttackComponent" parent="." instance=ExtResource("5_ifnfb")]
+damage = 1
 
 [connection signal="healthDepleted" from="HealthComponent" to="." method="_on_health_component_health_depleted"]
