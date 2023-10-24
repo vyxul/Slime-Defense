@@ -32,10 +32,10 @@ func _on_visible_on_screen_notifier_2d_screen_exited():
 
 
 func _on_hitbox_component_area_entered(area):
-	print_debug("%s hitbot was entered by %s's %s" %
-				[get_parent().name, area.get_parent().name, area.name])
+#	print_debug("%s hitbox was entered by %s's %s" %
+#				[get_parent().name, area.get_parent().name, area.name])
 	if (area is HurtboxComponent):
-		print_debug("%s's %s area was detected as a HurtboxComponent" % 
-					[area.get_parent().name, area.name])
+#		print_debug("%s's %s area was detected as a HurtboxComponent" % 
+#					[area.get_parent().name, area.name])
 		queue_free()
 	pass # Replace with function body.

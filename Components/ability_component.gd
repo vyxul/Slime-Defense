@@ -2,6 +2,7 @@ extends Node2D
 class_name AbilityComponent
 
 @onready var shurikenComponent = preload("res://Components/shuriken_component.tscn")
+@onready var shurikenGUI = preload("res://Player/shuriken_gui.tscn")
 @onready var container = $HBoxContainer
 @onready var timer = $Timer
 @onready var label = $Control/VBoxContainer/Label2
@@ -13,7 +14,7 @@ var shurikensGUI: Array
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	shurikensGUI = container.get_children()
+#	shurikensGUI = container.get_children()
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -42,21 +43,31 @@ func abilitySetUp(maxStacks: int, cooldown: int):
 	shurikenCurrentStacks = 0
 	shurikenCooldown = cooldown
 	
+	for i in range(shurikenMaxStacks):
+#		print_debug("i: %d, shurikenMaxStacks: %d" % [i, shurikenMaxStacks])
+		var shuriken = shurikenGUI.instantiate()
+		container.add_child(shuriken)
+		
+	shurikensGUI = container.get_children()
+#	print_debug("shurikensGUI.size = %d" % shurikensGUI.size())
+	
+	
 	label.text = str(shurikenCurrentStacks)
 	timer.wait_time = cooldown
 	timer.start()
 	
 	updateGUI()
 
-func useAbility(position):
+func useAbility(position: Vector2):
 	if (shurikenCurrentStacks <= 0):
 		return
 	
-	var mousePosition = get_local_mouse_position()
-	print_debug("mousePosition: %s" % str(mousePosition))
+	var mousePosition = get_global_mouse_position()
+#	print_debug("mousePosition: %s" % str(mousePosition))
 	var shuriken = shurikenComponent.instantiate()
 	shuriken.position = position
-	owner.add_child(shuriken)
+#	print_debug("shuriken.position: %s, position: %s" % [str(shuriken.position), str(position)])
+	owner.owner.add_child(shuriken)
 	shuriken.throw(mousePosition)
 	shurikenCurrentStacks -= 1
 	label.text = str(shurikenCurrentStacks)
@@ -67,7 +78,7 @@ func useAbility(position):
 		timer.start()
 
 func _on_timer_timeout():
-	print_debug("shurikenCurrentStacks: %d, shurikenMaxStacks: %d" % [shurikenCurrentStacks, shurikenMaxStacks])
+#	print_debug("shurikenCurrentStacks: %d, shurikenMaxStacks: %d" % [shurikenCurrentStacks, shurikenMaxStacks])
 	if (shurikenCurrentStacks >= shurikenMaxStacks):
 		timer.stop()
 		return

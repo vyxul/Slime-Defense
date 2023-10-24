@@ -4,10 +4,11 @@ class_name HurtboxComponent
 @export var healthComponent: HealthComponent
 
 func _ready():
-	if healthComponent:
-		print_debug(get_parent().name + " healthComponent found")
-	else:
-		print_debug(get_parent().name + " healthComponent not found")
+#	if healthComponent:
+#		print_debug(get_parent().name + " healthComponent found")
+#	else:
+#		print_debug(get_parent().name + " healthComponent not found")
+	pass
 
 func damage(attack: int):
 	if (healthComponent):

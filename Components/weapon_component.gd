@@ -25,7 +25,7 @@ func attack():
 #	if !isAttacking:
 	isAttacking = true
 	hitboxComponent.enable()
-	var mousePosition = get_viewport().get_mouse_position()
+	var mousePosition = get_global_mouse_position()
 #		var attackDirection = (mousePosition - position).normalized()
 	var attackDirection = get_parent().position.direction_to(mousePosition)
 	var attackPosition = attackDirection * Vector2(weaponOffset, weaponOffset)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://6x8a4lsfa826"]
+[gd_scene load_steps=13 format=3 uid="uid://6x8a4lsfa826"]
 
 [ext_resource type="Texture2D" uid="uid://prirf24n857l" path="res://Assets/Art/Enemies/BlueSlime.png" id="1_c7m7r"]
 [ext_resource type="Script" path="res://Enemies/blue_slime.gd" id="1_lvntx"]
@@ -10,6 +10,52 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ag5fx"]
 radius = 7.0
 height = 18.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vfctf"]
+radius = 9.2
+height = 19.2
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p5fmd"]
+radius = 7.6
+height = 19.2
+
+[sub_resource type="Animation" id="Animation_f5kwn"]
+resource_name = "moveDown"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 4, 8, 12]
+}
+
+[sub_resource type="Animation" id="Animation_gqwfg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7kvgt"]
+_data = {
+"RESET": SubResource("Animation_gqwfg"),
+"moveDown": SubResource("Animation_f5kwn")
+}
 
 [node name="BlueSlime" type="CharacterBody2D"]
 scale = Vector2(5, 5)
@@ -31,23 +77,31 @@ maxHealthPoints = 1
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("3_sn1xb")]
 collision_layer = 2
+collision_mask = 13
 healthComponent = NodePath("../HealthComponent")
 
 [node name="Hurtbox Collision" type="CollisionShape2D" parent="HurtboxComponent"]
 rotation = 1.5708
-shape = SubResource("CapsuleShape2D_ag5fx")
+shape = SubResource("CapsuleShape2D_vfctf")
 debug_color = Color(0.972549, 0, 0.447059, 0.419608)
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("attackComponent") instance=ExtResource("4_guffy")]
 collision_layer = 2
+collision_mask = 13
 attackComponent = NodePath("../AttackComponent")
 
 [node name="Hitbox Collision" type="CollisionShape2D" parent="HitboxComponent"]
 rotation = 1.5708
-shape = SubResource("CapsuleShape2D_ag5fx")
+shape = SubResource("CapsuleShape2D_p5fmd")
 debug_color = Color(0, 0.639216, 0.345098, 0.419608)
 
 [node name="AttackComponent" parent="." instance=ExtResource("5_ifnfb")]
 damage = 1
 
+[node name="Movement Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7kvgt")
+}
+
 [connection signal="healthDepleted" from="HealthComponent" to="." method="_on_health_component_health_depleted"]
+[connection signal="area_entered" from="HitboxComponent" to="." method="_on_hitbox_component_area_entered"]
