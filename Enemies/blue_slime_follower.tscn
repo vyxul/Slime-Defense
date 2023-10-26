@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Enemies/blue_slime_follower.gd" id="1_4wu3h"]
 [ext_resource type="PackedScene" uid="uid://6x8a4lsfa826" path="res://Enemies/blue_slime.tscn" id="1_rbamj"]
 
-[node name="BlueSlimeFollower" type="PathFollow2D" node_paths=PackedStringArray("blueSlime")]
+[node name="BlueSlimeFollower" type="PathFollow2D" node_paths=PackedStringArray("blueSlime") groups=["slimeFollower"]]
 position = Vector2(1523, 1725)
 rotation = -1.56157
 loop = false

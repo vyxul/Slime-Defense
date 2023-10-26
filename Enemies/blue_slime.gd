@@ -9,14 +9,14 @@ signal exitReached(damage: int)
 @onready var animations = $"Movement Animation"
 @onready var attackComponent = $AttackComponent
 
+func _ready():
+	animations.play("moveDown")
+	
 func _on_health_component_health_depleted():
 	print_debug("%s health has been depleted." % name)
 	healthDepleted.emit()
 	queue_free()
 	pass # Replace with function body.
-
-func _ready():
-	animations.play("moveDown")
 
 func _on_hitbox_component_area_entered(area):
 	print_debug("%s hitbox was entered by %s's %s" %

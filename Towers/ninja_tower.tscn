@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://co4262yd8kur4"]
+
+[ext_resource type="Script" path="res://Towers/ninja_tower.gd" id="1_8jp51"]
+[ext_resource type="Texture2D" uid="uid://b6ukgem3qjeci" path="res://Assets/Art/Towers/NinjaTower/NinjaTowerBaseV1.png" id="1_y7c8k"]
+[ext_resource type="Texture2D" uid="uid://c1107pafcjcy5" path="res://Assets/Art/Towers/NinjaTower/SpriteSheet.png" id="2_u368h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7fvkw"]
+size = Vector2(64, 64)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eq8tb"]
+
+[node name="NinjaTower" type="Node2D"]
+script = ExtResource("1_8jp51")
+attackCooldown = 0.2
+
+[node name="BaseSprite" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("1_y7c8k")
+
+[node name="TopSprite" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_u368h")
+hframes = 4
+vframes = 7
+
+[node name="Tower Body" type="StaticBody2D" parent="."]
+visible = false
+collision_layer = 4
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tower Body"]
+shape = SubResource("RectangleShape2D_7fvkw")
+
+[node name="TowerRangeComponent" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TowerRangeComponent"]
+scale = Vector2(16, 16)
+shape = SubResource("CircleShape2D_eq8tb")
+debug_color = Color(0.721569, 0.945098, 1, 0.243137)
+
+[node name="AttackTimer" type="Timer" parent="."]
+
+[connection signal="area_entered" from="TowerRangeComponent" to="." method="_on_tower_range_component_area_entered"]
+[connection signal="area_exited" from="TowerRangeComponent" to="." method="_on_tower_range_component_area_exited"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

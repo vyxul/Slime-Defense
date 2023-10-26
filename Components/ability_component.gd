@@ -37,7 +37,6 @@ func updateGUI():
 		shurikensGUI[index].update(1)
 		index += 1
 	
-	
 func abilitySetUp(maxStacks: int, cooldown: int):
 	shurikenMaxStacks = maxStacks
 	shurikenCurrentStacks = 0

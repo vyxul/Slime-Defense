@@ -15,23 +15,6 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xqgbb"]
 size = Vector2(106.375, 112.125)
 
-[sub_resource type="Animation" id="Animation_jajsi"]
-resource_name = "moveDown"
-length = 0.8
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Player Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 4, 8, 12]
-}
-
 [sub_resource type="Animation" id="Animation_1tm2i"]
 length = 0.001
 tracks/0/type = "value"
@@ -47,8 +30,8 @@ tracks/0/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_cwus6"]
-resource_name = "moveUp"
+[sub_resource type="Animation" id="Animation_jajsi"]
+resource_name = "moveDown"
 length = 0.8
 loop_mode = 1
 tracks/0/type = "value"
@@ -61,7 +44,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [1, 5, 9, 13]
+"values": [0, 4, 8, 12]
 }
 
 [sub_resource type="Animation" id="Animation_76ap6"]
@@ -98,6 +81,23 @@ tracks/0/keys = {
 "values": [3, 7, 11, 15]
 }
 
+[sub_resource type="Animation" id="Animation_cwus6"]
+resource_name = "moveUp"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 5, 9, 13]
+}
+
 [sub_resource type="Animation" id="Animation_nun0h"]
 resource_name = "sprintDown"
 length = 0.4
@@ -113,23 +113,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 4, 8, 12]
-}
-
-[sub_resource type="Animation" id="Animation_vs2a6"]
-resource_name = "sprintUp"
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Player Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [1, 5, 9, 13]
 }
 
 [sub_resource type="Animation" id="Animation_cix2i"]
@@ -166,6 +149,23 @@ tracks/0/keys = {
 "values": [3, 7, 11, 15]
 }
 
+[sub_resource type="Animation" id="Animation_vs2a6"]
+resource_name = "sprintUp"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 5, 9, 13]
+}
+
 [sub_resource type="Animation" id="Animation_xvisa"]
 resource_name = "throwDown"
 length = 0.4
@@ -180,22 +180,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [0, 16, 0]
-}
-
-[sub_resource type="Animation" id="Animation_7honl"]
-resource_name = "throwUp"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Player Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [1, 17, 1]
 }
 
 [sub_resource type="Animation" id="Animation_psrr6"]
@@ -228,6 +212,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [3, 19, 3]
+}
+
+[sub_resource type="Animation" id="Animation_7honl"]
+resource_name = "throwUp"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1, 17, 1]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_go8el"]

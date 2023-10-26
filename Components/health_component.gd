@@ -39,7 +39,7 @@ func updateMaxHealth(num: int):
 func updateCurrentHealth(num: int):
 	# If the new hp <= 0, just emit signal that unit is dead and skip the rest
 	if (num <= 0):
-		print_debug(get_parent().name + " new hp (%d) <= 0" % num)
+#		print_debug(get_parent().name + " new hp (%d) <= 0" % num)
 		healthPoints = 0
 		healthDepleted.emit()
 		return
@@ -58,7 +58,7 @@ func updateCurrentHealth(num: int):
 		isMaxHp = false
 		
 	healthPoints = num
-	print_debug(get_parent().name + " new hp: %d" % healthPoints)
+#	print_debug(get_parent().name + " new hp: %d" % healthPoints)
 	currentHpUpdated.emit(healthPoints)
 
 # Called just to calculate the new hp of the entity by current hp - given damage argument
@@ -67,7 +67,7 @@ func damage(num: int):
 		print_debug(get_parent().name + " was damaged with zero or negative number (%d)" % num)
 		return
 	
-	print_debug(get_parent().name + " was hurt by %d damage" % num)
+#	print_debug(get_parent().name + " was hurt by %d damage" % num)
 	updateCurrentHealth(healthPoints - num)
 	
 # Called just to calculate the new hp of the entity by current hp + given heal argument
@@ -77,7 +77,7 @@ func heal(num: int):
 		print_debug(get_parent().name + " was healed with zero or negative number (%d)" % num)
 		return
 	
-	print_debug(get_parent().name + " was healed by %d hp" % num)
+#	print_debug(get_parent().name + " was healed by %d hp" % num)
 	updateCurrentHealth(healthPoints + num)
 
 func _to_string():
