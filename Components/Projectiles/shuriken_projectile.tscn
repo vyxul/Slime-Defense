@@ -1,0 +1,102 @@
+[gd_scene load_steps=10 format=3 uid="uid://ddnsog6damt11"]
+
+[ext_resource type="Script" path="res://Towers/projectile.gd" id="1_mda1b"]
+[ext_resource type="Texture2D" uid="uid://j33jous42tit" path="res://Assets/Art/Weapons/Shuriken/shuriken.png" id="2_66uco"]
+[ext_resource type="PackedScene" uid="uid://btdv6ffutib13" path="res://Components/hitbox_component.tscn" id="3_e50nb"]
+[ext_resource type="Script" path="res://Components/attack_component.gd" id="4_lr531"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qlbeg"]
+radius = 402.045
+
+[sub_resource type="Animation" id="Animation_piqyq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_finic"]
+resource_name = "moveAnimation"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.785398, 1.5708, 2.35619, 3.14159, 3.92699, 4.71239, 5.49779, 6.28319]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rfw6o"]
+_data = {
+"RESET": SubResource("Animation_piqyq"),
+"moveAnimation": SubResource("Animation_finic")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vkn0c"]
+radius = 393.0
+
+[node name="ShurikenProjectile" type="CharacterBody2D"]
+visible = false
+scale = Vector2(0.05, 0.05)
+script = ExtResource("1_mda1b")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_66uco")
+
+[node name="HitboxComponent" parent="Sprite2D" node_paths=PackedStringArray("attackComponent") instance=ExtResource("3_e50nb")]
+attackComponent = NodePath("../../AttackComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/HitboxComponent"]
+shape = SubResource("CircleShape2D_qlbeg")
+debug_color = Color(0.996078, 0, 0.164706, 0.419608)
+
+[node name="AttackComponent" type="Node2D" parent="."]
+script = ExtResource("4_lr531")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rfw6o")
+}
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vkn0c")

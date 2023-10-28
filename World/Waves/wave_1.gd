@@ -38,7 +38,8 @@ func setUpEnemies():
 	for i in range(enemyCount):
 		enemyList.append(enemyName)
 		
-	print_debug(str(enemyList))
+#	print_debug(str(enemyList))
+	print_debug("Spawning %d enemies for wave 1" % enemyCount)
 
 func setEnemyPath(enemyPath2D: Path2D):
 	enemyPath = enemyPath2D
@@ -62,8 +63,8 @@ func _on_spawn_timer_timeout():
 		print("All enemies have already been spawned")
 		return
 		
-	print_debug("enemiesSpawned: %d, enemySpawnTotal: %d" %
-				[enemiesSpawned, enemySpawnTotal])
+#	print_debug("enemiesSpawned: %d, enemySpawnTotal: %d" %
+#				[enemiesSpawned, enemySpawnTotal])
 				
 	var enemyName = enemyList[enemiesSpawned].replace(" ", "_").to_lower()
 	enemyFollowerRsrc = load("res://Enemies/" + enemyName + "_follower.tscn")

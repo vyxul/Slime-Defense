@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://85pjcydgy1s0"]
+
+[ext_resource type="Script" path="res://Enemies/enemy.gd" id="1_upcik"]
+[ext_resource type="PackedScene" uid="uid://cit2cdkydlfww" path="res://Components/health_component.tscn" id="2_mkee0"]
+[ext_resource type="PackedScene" uid="uid://btdv6ffutib13" path="res://Components/hitbox_component.tscn" id="3_iqe7q"]
+[ext_resource type="PackedScene" uid="uid://cwergp0mb2m60" path="res://Components/attack_component.tscn" id="4_m2xlk"]
+[ext_resource type="PackedScene" uid="uid://bhatg6awsunwl" path="res://Components/hurtbox_component.tscn" id="5_fwaiv"]
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_upcik")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_mkee0")]
+
+[node name="HurtboxComponent" parent="." instance=ExtResource("5_fwaiv")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+
+[node name="AttackComponent" parent="." instance=ExtResource("4_m2xlk")]
+
+[node name="HitboxComponent" parent="." instance=ExtResource("3_iqe7q")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

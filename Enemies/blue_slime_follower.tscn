@@ -13,7 +13,7 @@ blueSlime = NodePath("BlueSlime")
 [node name="BlueSlime" parent="." instance=ExtResource("1_rbamj")]
 position = Vector2(-0.916626, 9.00867)
 rotation = 1.56157
-moveSpeed = 300
+moveSpeed = 400
 
 [connection signal="exitReached" from="BlueSlime" to="." method="_on_blue_slime_exit_reached"]
 [connection signal="healthDepleted" from="BlueSlime" to="." method="_on_blue_slime_health_depleted"]

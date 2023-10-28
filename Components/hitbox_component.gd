@@ -37,7 +37,7 @@ func disable():
 # I'm deciding to base logic off of hitbox detecting the hurtbox
 # Could do it the other way around if wanted
 func _on_area_entered(area):
-#	print_debug("%s hitbot was entered by %s's %s" %
+#	print_debug("%s hitbox was entered by %s's %s" %
 #				[get_parent().name, area.get_parent().name, area.name])
 	if (area is HurtboxComponent):
 #		print_debug("%s's %s area was detected as a HurtboxComponent" % 

@@ -16,10 +16,19 @@ var isMaxHp: bool = true
 func _ready():
 	# Current HP should be at max at start of life
 	# otherwise will lead to problems
-	if (maxHealthPoints <= 0):
-		print_debug(get_parent().name + " max hp (%d) not set up correctly" % maxHealthPoints)
+#	if (maxHealthPoints <= 0):
+#		print_debug(get_parent().name + " max hp (%d) not set up correctly" % maxHealthPoints)
 		
 	healthPoints = maxHealthPoints
+
+func setHP(num: int):
+	# do not allow max hp <= 0
+	if (num <= 0):
+		print_debug("Given max hp argument (%d) not allowed. Must be positive" % num)
+		return
+	
+	maxHealthPoints = num
+	healthPoints = num
 
 # Called just to update the max hp of the entity
 # if current hp is less than new max hp, adjust that to max hp also

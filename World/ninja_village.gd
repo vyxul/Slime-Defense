@@ -17,7 +17,7 @@ var wave
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print_debug("in ready of ninja village")
+#	print_debug("in ready of ninja village")
 	
 	# Set up camera bounds variables
 	var mapSize = map.get_used_rect()
@@ -57,18 +57,20 @@ func _process(delta):
 	pass
 	
 func enemyHealthDepleted():
-	print_debug("enemy died")
+#	print_debug("enemy died")
 #	enemySpawnCount -= 1
 	
 #	if timer.is_stopped():
 #		timer.start()
+	pass
 	
 func enemyReachedExit(damage: int):
-	print_debug("enemy dealt %d damage to the village" % damage)
+#	print_debug("enemy dealt %d damage to the village" % damage)
 #	enemySpawnCount -= 1
 #
 #	if timer.is_stopped():
 #		timer.start()
+	pass
 
 func waveOver():
 	print_debug("Wave %d over" % currentWave)
@@ -107,3 +109,8 @@ func _on_spawn_timer_timeout():
 		print_debug("enemySpawnCount: %d, enemySpawnMax: %d, not spawning slime" % 
 					[enemySpawnCount, enemySpawnMax])
 		timer.stop()
+
+
+func _on_map_bounds_area_entered(area):
+	print_debug("%s's MapBounds entered by %s" % [name, area.name])
+	pass # Replace with function body.

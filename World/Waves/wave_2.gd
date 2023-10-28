@@ -23,7 +23,7 @@ var enemyFollowerRsrc
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print_debug("doing ready stuff for wave_1")
+	print_debug("doing ready stuff for wave_2")
 	# Set up the timer
 	timer.wait_time = enemySpawnInterval
 		

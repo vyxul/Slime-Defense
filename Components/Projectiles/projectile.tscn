@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://10de6rbrw64f"]
+
+[ext_resource type="Script" path="res://Towers/projectile.gd" id="1_tdf8r"]
+[ext_resource type="PackedScene" uid="uid://btdv6ffutib13" path="res://Components/hitbox_component.tscn" id="2_mrxh2"]
+[ext_resource type="PackedScene" uid="uid://cwergp0mb2m60" path="res://Components/attack_component.tscn" id="3_8adn0"]
+
+[node name="Projectile" type="CharacterBody2D"]
+script = ExtResource("1_tdf8r")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="HitboxComponent" parent="Sprite2D" node_paths=PackedStringArray("attackComponent") instance=ExtResource("2_mrxh2")]
+attackComponent = NodePath("../../AttackComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/HitboxComponent"]
+
+[node name="AttackComponent" parent="." instance=ExtResource("3_8adn0")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[connection signal="area_entered" from="Sprite2D/HitboxComponent" to="." method="_on_hitbox_component_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

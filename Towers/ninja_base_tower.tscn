@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://bh77botsqrli7"]
+
+[ext_resource type="Script" path="res://Towers/tower.gd" id="1_f1tm3"]
+[ext_resource type="Texture2D" uid="uid://b6ukgem3qjeci" path="res://Assets/Art/Towers/NinjaTower/NinjaTowerBaseV1.png" id="2_ie0d7"]
+[ext_resource type="Texture2D" uid="uid://c1107pafcjcy5" path="res://Assets/Art/Towers/NinjaTower/SpriteSheet.png" id="3_fr0o7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pjneq"]
+size = Vector2(128, 128)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mr1ch"]
+radius = 200.0
+
+[node name="NinjaBaseTower" type="Node2D"]
+script = ExtResource("1_f1tm3")
+projectileSceneString = "res://Components/Projectiles/shuriken_projectile.tscn"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(8, 8)
+texture = ExtResource("2_ie0d7")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("3_fr0o7")
+hframes = 4
+vframes = 7
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_pjneq")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_mr1ch")
+debug_color = Color(0.537255, 0.909804, 1, 0.117647)
+
+[node name="Timer" type="Timer" parent="."]

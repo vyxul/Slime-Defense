@@ -19,8 +19,8 @@ func _on_health_component_health_depleted():
 	pass # Replace with function body.
 
 func _on_hitbox_component_area_entered(area):
-	print_debug("%s hitbox was entered by %s's %s" %
-				[get_parent().name, area.get_parent().name, area.name])
+#	print_debug("%s hitbox was entered by %s's %s" %
+#				[get_parent().name, area.get_parent().name, area.name])
 	if (area.name == "Exit"):
 		exitReached.emit(attackComponent.damage)
 		queue_free()

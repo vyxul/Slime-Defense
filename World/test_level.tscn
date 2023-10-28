@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cavtemjiwo66w"]
+[gd_scene load_steps=5 format=3 uid="uid://cavtemjiwo66w"]
 
 [ext_resource type="PackedScene" uid="uid://6x8a4lsfa826" path="res://Enemies/blue_slime.tscn" id="1_anlg5"]
+[ext_resource type="PackedScene" uid="uid://brbpjiqqkeljh" path="res://Enemies/blue_slime_enemy.tscn" id="2_4o6ov"]
 [ext_resource type="PackedScene" uid="uid://ddvy5ge64ko5b" path="res://Player/player.tscn" id="2_nj7hq"]
 [ext_resource type="PackedScene" uid="uid://co4262yd8kur4" path="res://Towers/ninja_tower.tscn" id="3_eoi10"]
 
@@ -16,6 +17,9 @@ position = Vector2(769, 210)
 
 [node name="BlueSlime3" parent="Enemies" instance=ExtResource("1_anlg5")]
 position = Vector2(991, 207)
+
+[node name="BlueSlimeEnemy" parent="Enemies" instance=ExtResource("2_4o6ov")]
+position = Vector2(931, 433)
 
 [node name="Player" type="Node" parent="."]
 

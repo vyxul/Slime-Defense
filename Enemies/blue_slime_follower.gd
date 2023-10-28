@@ -6,7 +6,7 @@ extends PathFollow2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print_debug("blueSlime moveSpeed: %d" % moveSpeed)
+#	print_debug("blueSlime moveSpeed: %d" % moveSpeed)
 	visible = false
 	pass # Replace with function body.
 
@@ -22,10 +22,10 @@ func _physics_process(delta):
 	pass
 	
 func start():
-	print_debug("%s, currentSpeed: %d, newSpeed: %d" % [name, moveSpeed, blueSlime.moveSpeed])
+#	print_debug("%s, currentSpeed: %d, newSpeed: %d" % [name, moveSpeed, blueSlime.moveSpeed])
 	visible = true
 	moveSpeed = blueSlime.moveSpeed
-	print_debug("newSpeed: %d" % moveSpeed)
+#	print_debug("newSpeed: %d" % moveSpeed)
 
 
 func _on_blue_slime_exit_reached(damage):
