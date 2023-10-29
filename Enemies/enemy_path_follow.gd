@@ -59,11 +59,9 @@ func start():
 	moveSpeed = enemyChildNode.moveSpeed
 
 func _on_enemy_exit_reached(damage):
-	print_debug("testing")
 	SignalGlobal.enemyReachedExit.emit(damage)
 	queue_free()
 
 func _on_enemy_health_depleted():
-	print_debug("testing")
 	SignalGlobal.enemyHealthDepleted.emit()
 	queue_free()

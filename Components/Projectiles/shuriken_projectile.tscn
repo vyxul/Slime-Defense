@@ -100,3 +100,5 @@ libraries = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_vkn0c")
+
+[node name="Timer" type="Timer" parent="."]

@@ -10,10 +10,14 @@ extends Control
 @onready var timer = $SpawnTimer
 @onready var path = $EnemyPath
 @onready var blueSlimeFollower = preload("res://Enemies/blue_slime_follower.tscn")
+@onready var tower = load("res://Towers/ninja_base_tower.tscn")
+@onready var towerPlacementBox = $TowerPlacementBox
 
 var enemySpawnCount: int = 0
-var currentWave: int = 1
+var currentWave: int = 0
 var wave
+
+var inPlacementMode: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -49,12 +53,13 @@ func _ready():
 #	wave.start_wave()
 #	wave.waveOver.connect(waveOver)
 
-	var waveResource = load("res://World/Waves/wave_1_test.tscn")
-	wave = waveResource.instantiate()
-	add_child(wave)
-	wave.setEnemyPath(path)
-	wave.start_wave()
-	wave.waveOver.connect(waveOver)
+#	var waveResource = load("res://World/Waves/wave_" + str(currentWave) + ".tscn")
+#	wave = waveResource.instantiate()
+#	add_child(wave)
+#	wave.setEnemyPath(path)
+#	wave.start_wave()
+#	wave.waveOver.connect(waveOver)
+	nextWave()
 	
 	pass # Replace with function body.
 
@@ -63,6 +68,19 @@ func _ready():
 func _process(delta):
 	pass
 	
+func _input(event):
+	# For toggling the towerPlacementBox
+	if event.is_action_pressed("b"):
+		print_debug("b button toggled")
+		
+		inPlacementMode = !inPlacementMode
+		$TowerPlacementBox.setPlacementMode(inPlacementMode)
+		
+	if inPlacementMode and towerPlacementBox.getPlacementOkay() and event.is_action_pressed("leftClick"):
+		var towerNode = tower.instantiate()
+		towerNode.position = get_global_mouse_position()
+		add_child(towerNode)
+
 func enemyHealthDepleted():
 #	print_debug("enemy died")
 #	enemySpawnCount -= 1
@@ -82,7 +100,7 @@ func enemyReachedExit(damage: int):
 func waveOver():
 	print_debug("Wave %d over" % currentWave)
 	wave.queue_free()
-#	nextWave()
+	nextWave()
 	
 func nextWave():
 	currentWave += 1
@@ -94,7 +112,6 @@ func nextWave():
 		return
 	
 	var waveResource = load("res://World/Waves/wave_" + str(currentWave) + ".tscn")
-		
 	wave = waveResource.instantiate()
 	add_child(wave)
 	wave.setEnemyPath(path)
@@ -119,5 +136,5 @@ func _on_spawn_timer_timeout():
 
 
 func _on_map_bounds_area_entered(area):
-	print_debug("%s's MapBounds entered by %s" % [name, area.name])
+#	print_debug("%s's MapBounds entered by %s" % [name, area.name])
 	pass # Replace with function body.

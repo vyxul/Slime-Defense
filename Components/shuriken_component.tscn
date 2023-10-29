@@ -84,7 +84,7 @@ scale = Vector2(0.04625, 0.04625)
 texture = ExtResource("1_2d0a1")
 
 [node name="HitboxComponent" parent="Shuriken Sprite" node_paths=PackedStringArray("attackComponent") instance=ExtResource("2_7ao1k")]
-collision_mask = 2
+collision_mask = 10
 attackComponent = NodePath("../../AttackComponent")
 
 [node name="Hitbox Collision" type="CollisionShape2D" parent="Shuriken Sprite/HitboxComponent"]

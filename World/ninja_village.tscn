@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cdva18on136c"]
+[gd_scene load_steps=21 format=3 uid="uid://cdva18on136c"]
 
 [ext_resource type="Script" path="res://World/ninja_village.gd" id="1_15vgs"]
 [ext_resource type="Texture2D" uid="uid://bdm8iv7d44hk8" path="res://Assets/Backgrounds/Tilesets/TilesetFloor.png" id="1_83rs0"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://co4262yd8kur4" path="res://Towers/ninja_tower.tscn" id="8_i6xea"]
 [ext_resource type="PackedScene" uid="uid://bh77botsqrli7" path="res://Towers/ninja_base_tower.tscn" id="9_gagus"]
 [ext_resource type="PackedScene" uid="uid://dc1knu28httpg" path="res://Towers/samurai_tower.tscn" id="10_xneon"]
+[ext_resource type="PackedScene" uid="uid://dobxqn1vnobny" path="res://Towers/tower_placement_box.tscn" id="11_ou0qx"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hdtsa"]
 
@@ -8671,20 +8672,31 @@ shape = SubResource("RectangleShape2D_gt6m1")
 [node name="SpawnTimer" type="Timer" parent="."]
 
 [node name="NinjaTower" parent="." instance=ExtResource("8_i6xea")]
-position = Vector2(2288, 1155)
+position = Vector2(2039, 1520)
 
 [node name="NinjaBaseTower" parent="." instance=ExtResource("9_gagus")]
 position = Vector2(1530, 1105)
+attackCooldown = 0.5
+projectileSpeed = 1000
+projectileDamage = 2
+projectilePierce = 3
 
 [node name="SamuraiTower" parent="." instance=ExtResource("10_xneon")]
 position = Vector2(934, 1103)
+attackCooldown = 0.1
+projectileSpeed = 1000
+projectileDamage = 2
 
 [node name="MapBounds" type="Area2D" parent="."]
 visible = false
+collision_layer = 8
+collision_mask = 63
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MapBounds"]
 build_mode = 1
 polygon = PackedVector2Array(1, -22, 0, 1729, 3073, 1731, 3071, -23)
+
+[node name="TowerPlacementBox" parent="." instance=ExtResource("11_ou0qx")]
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="area_entered" from="MapBounds" to="." method="_on_map_bounds_area_entered"]

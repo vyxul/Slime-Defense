@@ -143,7 +143,7 @@ func setupStats():
 
 # When enemy dies, emit a signal to let game manager know
 func _on_health_component_health_depleted():
-	print_debug("%s health has been depleted." % name)
+#	print_debug("%s health has been depleted." % name)
 	healthDepleted.emit()
 	queue_free()
 

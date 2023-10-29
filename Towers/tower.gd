@@ -31,7 +31,7 @@ var enemiesInRange: Array = []
 # 4 is for tower
 # 2 is for enemy
 var projectileCollisionLayer: int = 32
-var projectileCollisionMask: int = 2
+var projectileCollisionMask: int = 10
 
 func _ready():
 	# Get references to the different child nodes
@@ -179,16 +179,16 @@ func topLookAt(enemyPosition: Vector2):
 
 # Controls how the tower attacks the enemy
 func attack(enemyPosition: Vector2):
-	print_debug("%s attacking at %s from %s" %
-				[name, str(enemyPosition), str(global_position)])
+#	print_debug("%s attacking at %s from %s" %
+#				[name, str(enemyPosition), str(global_position)])
 	if isAttacking:
-		print_debug("%s attack cooldown not finished yet" % name)
+#		print_debug("%s attack cooldown not finished yet" % name)
 		return
 		
 	isAttacking = true
 
 	var projectile = projectileScene.instantiate()
-	owner.add_child(projectile)
+	get_parent().add_child(projectile)
 	projectile.position = position
 	projectile.setSpeed(projectileSpeed)
 	projectile.setDamage(projectileDamage)

@@ -82,8 +82,8 @@ func _on_spawn_timer_timeout():
 		print("All enemies have already been spawned")
 		return
 		
-	print_debug("enemyTypeSpawnCounter: %d, enemySpawnList.size(): %d" %
-				[enemyTypeSpawnCounter, enemySpawnList.size()])
+#	print_debug("enemyTypeSpawnCounter: %d, enemySpawnList.size(): %d" %
+#				[enemyTypeSpawnCounter, enemySpawnList.size()])
 	
 	# Spawn the enemy and start them
 	var enemyPathFollower = enemyPathResource.instantiate()
@@ -92,9 +92,9 @@ func _on_spawn_timer_timeout():
 	enemyPathFollower.start()
 	
 	# Increment counters to be ready for next timeout
-	print_debug("enemyTypeSpawnCounter: %d, enemySpawnList[%d]: %s, enemySpawnCount[%d]: %d, enemySpawnCounter: %d" %
-				[enemyTypeSpawnCounter, enemyTypeSpawnCounter, enemySpawnList[enemyTypeSpawnCounter],
-				 enemyTypeSpawnCounter, enemySpawnCount[enemyTypeSpawnCounter], enemySpawnCounter])
+#	print_debug("enemyTypeSpawnCounter: %d, enemySpawnList[%d]: %s, enemySpawnCount[%d]: %d, enemySpawnCounter: %d" %
+#				[enemyTypeSpawnCounter, enemyTypeSpawnCounter, enemySpawnList[enemyTypeSpawnCounter],
+#				 enemyTypeSpawnCounter, enemySpawnCount[enemyTypeSpawnCounter], enemySpawnCounter])
 	enemySpawnCounter += 1
 	if (enemySpawnCounter >= enemySpawnCount[enemyTypeSpawnCounter]):
 		enemySpawnCounter = 0
@@ -102,15 +102,15 @@ func _on_spawn_timer_timeout():
 		print_debug("Moving to next enemy type")
 
 func enemyHealthDepleted():
-	print_debug("enemy died")
+#	print_debug("enemy died")
 	enemiesAlive -= 1
-	print_debug("enemiesAlive: %d" % enemiesAlive)
+#	print_debug("enemiesAlive: %d" % enemiesAlive)
 	if (enemiesAlive == 0):
 		waveOver.emit()
 	
 func enemyReachedExit(damage: int):
-	print_debug("enemy dealt %d damage to the village" % damage)
+#	print_debug("enemy dealt %d damage to the village" % damage)
 	enemiesAlive -= 1
-	print_debug("enemiesAlive: %d" % enemiesAlive)
+#	print_debug("enemiesAlive: %d" % enemiesAlive)
 	if (enemiesAlive == 0):
 		waveOver.emit()

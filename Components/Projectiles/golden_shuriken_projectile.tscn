@@ -101,3 +101,5 @@ scale = Vector2(20, 20)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_hd0wq")
+
+[node name="Timer" type="Timer" parent="."]

@@ -10,12 +10,14 @@ var attackComponent: AttackComponent
 var animations: AnimationPlayer
 var onScreenNotifier: VisibleOnScreenNotifier2D
 var movement: CollisionShape2D
+var timer: Timer
 
 # Variables for the specific projectile
 var projectileSpeed: int = 0
 var projectileDamage: int = 0
 var projectilePierceLimit: int = 1
 var enemiesPierced: int = 0
+var projectileTime: float = 5
 
 func _ready():
 	sprite           = $Sprite2D
@@ -25,6 +27,7 @@ func _ready():
 	animations       = $AnimationPlayer
 	onScreenNotifier = $VisibleOnScreenNotifier2D
 	movement         = $CollisionShape2D
+	timer            = $Timer
 
 	# Check to see if all needed nodes for a projectile is added correctly
 	if !sprite:
@@ -55,6 +58,10 @@ func _ready():
 		isCorrectlySetup = false
 		print_debug("%s movement not correctly set up" % name)
 		
+	if !timer:
+		isCorrectlySetup = false
+		print_debug("%s timer not correctly set up" % name)
+		
 	# Check if the collision shapes have a shape set up
 	if hitboxCollision && !hitboxCollision.shape:
 		isCorrectlySetup = false
@@ -69,11 +76,16 @@ func _ready():
 		isCorrectlySetup = false
 		print_debug("%s hitboxComponent attackComponent link not correctly set up" % name)
 		
+	if timer:
+		timer.wait_time = projectileTime
+		timer.one_shot = true
+		timer.timeout.connect(_on_timer_timeout)
+		
 	# Setting up the event connections
 	if hitboxComponent:
 		hitboxComponent.area_entered.connect(_on_hitbox_component_area_entered.bind())
-	if onScreenNotifier:
-		onScreenNotifier.screen_exited.connect(_on_visible_on_screen_notifier_2d_screen_exited)
+#	if onScreenNotifier:
+#		onScreenNotifier.screen_exited.connect(_on_visible_on_screen_notifier_2d_screen_exited)
 	
 	# Just for testing that projectile works
 #	setSpeed(300)
@@ -112,20 +124,25 @@ func setCollisionMask(num: int = 0):
 
 # Removes the projectile when leaving the screen
 func _on_visible_on_screen_notifier_2d_screen_exited():
-	print_debug("%s has exited the screen, calling queue_free()" % name)
+#	print_debug("%s has exited the screen, calling queue_free()" % name)
 	queue_free()
 
 # Removes the projectile when hitting a hurtbox
 func _on_hitbox_component_area_entered(area):
-	print_debug("%s's %s's %s hitbox was entered by %s's %s" %
-				[get_parent().get_parent().name, get_parent().name, name, area.get_parent().name, area.name])
+#	print_debug("%s's %s's %s hitbox was entered by %s's %s" %
+#				[get_parent().get_parent().name, get_parent().name, name, area.get_parent().name, area.name])
 	if (area is HurtboxComponent):
-		print_debug("%s's %s area was detected as a HurtboxComponent" % 
-					[area.get_parent().name, area.name])
+#		print_debug("%s's %s area was detected as a HurtboxComponent" % 
+#					[area.get_parent().name, area.name])
 		enemiesPierced += 1
 		
 		if (enemiesPierced >= projectilePierceLimit):
 			queue_free()
+			
+	if (area.name == "MapBounds"):
+#		print_debug("%s's %s area was detected as a MapBounds" % [area.get_parent().name, area.name])
+		
+		queue_free()
 
 # Moves the projectile towards the given position
 func move(targetPosition: Vector2):
@@ -138,10 +155,16 @@ func move(targetPosition: Vector2):
 	else:
 		print_debug("%s moveAnimation not found" % name)
 	
-	print_debug("%s moving from %s to %s" %
-				[name, str(global_position), str(targetPosition)])
+#	print_debug("%s moving from %s to %s" %
+#				[name, str(global_position), str(targetPosition)])
 	var projectileDirection = position.direction_to(targetPosition)
 #	print_debug("projectileDirection: %s" % str(projectileDirection))
 
 	velocity = projectileDirection * projectileSpeed
 #	print_debug("velocity: %s" % str(velocity))
+	timer.start()
+
+func _on_timer_timeout():
+	print_debug("%s has passed the projectile time. Freeing from tree.")
+	queue_free()
+	pass # Replace with function body.

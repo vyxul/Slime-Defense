@@ -26,15 +26,21 @@ func throw(throwPosition: Vector2):
 	velocity = shurikenDirection * shurikenSpeed
 #	print_debug("velocity: %s" % str(velocity))
 	
-func _on_visible_on_screen_notifier_2d_screen_exited():
-#	print_debug("%s has left the screen, freeing from queue" % name)
-	queue_free()
+#func _on_visible_on_screen_notifier_2d_screen_exited():
+##	print_debug("%s has left the screen, freeing from queue" % name)
+#	queue_free()
 
 
 func _on_hitbox_component_area_entered(area):
-	print_debug("%s's %s hitbox was entered by %s's %s" %
-				[get_parent().name, name, area.get_parent().name, area.name])
+#	print_debug("%s's %s hitbox was entered by %s's %s" %
+#				[get_parent().name, name, area.get_parent().name, area.name])
 	if (area is HurtboxComponent):
 		print_debug("%s's %s area was detected as a HurtboxComponent" % 
 					[area.get_parent().name, area.name])
 		queue_free()
+		
+	if (area.name == "MapBounds"):
+#		print_debug("%s's %s area was detected as a MapBounds" % 
+#					[area.get_parent().name, area.name])
+		queue_free()
+		

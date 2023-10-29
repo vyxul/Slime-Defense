@@ -59,21 +59,21 @@ func topLookAt(enemyPosition: Vector2):
 			top.frame = 2
 
 func _on_tower_range_component_area_entered(area):
-	print_debug("%s range was entered by %s's %s" %
-				[get_parent().name, area.get_parent().name, area.name])
+#	print_debug("%s range was entered by %s's %s" %
+#				[get_parent().name, area.get_parent().name, area.name])
 	if area is HurtboxComponent:
 		enemiesInRange.append(area)
 	
 func _on_tower_range_component_area_exited(area):
-	print_debug("%s range was exited by %s's %s" %
-				[get_parent().name, area.get_parent().name, area.name])
+#	print_debug("%s range was exited by %s's %s" %
+#				[get_parent().name, area.get_parent().name, area.name])
 	
 	if area is HurtboxComponent:
 		enemiesInRange.erase(area)
 
 func attack(attackPosition: Vector2):
-	print_debug("%s attacking at %s from %s" %
-				[name, str(attackPosition), str(global_position)])
+#	print_debug("%s attacking at %s from %s" %
+#				[name, str(attackPosition), str(global_position)])
 	if isAttacking:
 		print_debug("%s attack cooldown not finished yet" % name)
 		return
@@ -90,8 +90,8 @@ func attack(attackPosition: Vector2):
 	projectile.setSpeed(200)
 	projectile.setDamage(1)
 	projectile.setPierceLimit(3)
-	projectile.setCollisionLayer(4)
-	projectile.setCollisionMask(2)
+	projectile.setCollisionLayer(32)
+	projectile.setCollisionMask(10)
 	projectile.move(attackPosition)
 
 	attackTimer.start()
