@@ -21,6 +21,7 @@ height = 22.0
 [node name="BlueSlimeEnemy" type="CharacterBody2D"]
 scale = Vector2(2, 2)
 script = ExtResource("1_sw70x")
+moveSpeed = 300
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_6ewab")
@@ -34,8 +35,7 @@ shape = SubResource("CapsuleShape2D_yv18r")
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_u3ors")]
 
-[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("3_mot8c")]
-healthComponent = NodePath("../HealthComponent")
+[node name="HurtboxComponent" parent="." instance=ExtResource("3_mot8c")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 position = Vector2(0, 1)
@@ -45,8 +45,7 @@ debug_color = Color(0.984314, 0, 0.356863, 0.419608)
 
 [node name="AttackComponent" parent="." instance=ExtResource("4_ubx1e")]
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("attackComponent") instance=ExtResource("5_1iok6")]
-attackComponent = NodePath("../AttackComponent")
+[node name="HitboxComponent" parent="." instance=ExtResource("5_1iok6")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 position = Vector2(0, 1)

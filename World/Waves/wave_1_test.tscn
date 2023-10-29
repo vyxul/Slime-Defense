@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfr3h8awqai0a"]
+
+[ext_resource type="Script" path="res://World/Waves/wave.gd" id="1_ngu16"]
+
+[node name="Wave_1_Test" type="Node2D"]
+script = ExtResource("1_ngu16")
+enemySpawnList = Array[String](["res://Enemies/blue_slime_enemy.tscn", "res://Enemies/green_slime_enemy.tscn", "res://Enemies/yellow_slime_enemy.tscn"])
+enemySpawnCount = Array[int]([10, 7, 5])
+enemySpawnInterval = 0.5
+
+[node name="Timer" type="Timer" parent="."]

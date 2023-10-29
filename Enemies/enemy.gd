@@ -86,6 +86,13 @@ func _ready():
 		isCorrectlySetup = false
 		print_debug("%s hurtboxCollision shape not correctly set up" % name)
 		
+	# Link the healthComponent/attackComponent with hurtboxComponent/hitboxComponent
+	if !isCorrectlySetup:
+		print_debug("Cannot set up component connections, %s enemy is not correctly set up" % name)
+	else:
+		hurtboxComponent.healthComponent = healthComponent
+		hitboxComponent.attackComponent = attackComponent
+		
 	# Check if HealthComponent has been linked to HurtboxComponent
 	if hurtboxComponent && !hurtboxComponent.healthComponent:
 		isCorrectlySetup = false
@@ -105,7 +112,7 @@ func _ready():
 		
 	# Set up the tower collision masks during runtime so we don't have to set it up when making tower in GUI
 	if !isCorrectlySetup:
-		print_debug("Cannot set up collision layers, %s tower is not correctly set up" % name)
+		print_debug("Cannot set up collision layers, %s enemy is not correctly set up" % name)
 	else:
 		collision_layer = 2
 		collision_mask = 13

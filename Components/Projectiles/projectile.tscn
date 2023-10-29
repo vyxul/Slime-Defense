@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://10de6rbrw64f"]
 
-[ext_resource type="Script" path="res://Towers/projectile.gd" id="1_tdf8r"]
+[ext_resource type="Script" path="res://Components/Projectiles/projectile.gd" id="1_tdf8r"]
 [ext_resource type="PackedScene" uid="uid://btdv6ffutib13" path="res://Components/hitbox_component.tscn" id="2_mrxh2"]
 [ext_resource type="PackedScene" uid="uid://cwergp0mb2m60" path="res://Components/attack_component.tscn" id="3_8adn0"]
 

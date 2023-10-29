@@ -30,7 +30,7 @@ var enemiesInRange: Array = []
 # Collision Layer/Mask shouldn't change unless they are changed in project settings
 # 4 is for tower
 # 2 is for enemy
-var projectileCollisionLayer: int = 4
+var projectileCollisionLayer: int = 32
 var projectileCollisionMask: int = 2
 
 func _ready():

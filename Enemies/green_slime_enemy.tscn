@@ -1,0 +1,59 @@
+[gd_scene load_steps=10 format=3 uid="uid://biecwmku864xb"]
+
+[ext_resource type="Script" path="res://Enemies/enemy.gd" id="1_ehbb3"]
+[ext_resource type="Texture2D" uid="uid://prirf24n857l" path="res://Assets/Art/Enemies/BlueSlime.png" id="2_lg0cu"]
+[ext_resource type="PackedScene" uid="uid://cit2cdkydlfww" path="res://Components/health_component.tscn" id="3_kqwun"]
+[ext_resource type="PackedScene" uid="uid://bhatg6awsunwl" path="res://Components/hurtbox_component.tscn" id="4_013u5"]
+[ext_resource type="PackedScene" uid="uid://cwergp0mb2m60" path="res://Components/attack_component.tscn" id="5_v0usi"]
+[ext_resource type="PackedScene" uid="uid://btdv6ffutib13" path="res://Components/hitbox_component.tscn" id="6_sips1"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_heap4"]
+radius = 8.0
+height = 20.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_piojk"]
+height = 24.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7ns2k"]
+radius = 9.0
+height = 22.0
+
+[node name="GreenSlimeEnemy" type="CharacterBody2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_ehbb3")
+healthPoints = 3
+damage = 3
+moveSpeed = 400
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0, 1, 0, 1)
+texture = ExtResource("2_lg0cu")
+hframes = 4
+vframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_heap4")
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_kqwun")]
+
+[node name="HurtboxComponent" parent="." instance=ExtResource("4_013u5")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+position = Vector2(0, 1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_piojk")
+debug_color = Color(0.984314, 0, 0.356863, 0.419608)
+
+[node name="AttackComponent" parent="." instance=ExtResource("5_v0usi")]
+
+[node name="HitboxComponent" parent="." instance=ExtResource("6_sips1")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(0, 1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_7ns2k")
+debug_color = Color(0, 0.635294, 0.396078, 0.419608)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

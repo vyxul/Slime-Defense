@@ -42,7 +42,14 @@ func _ready():
 	SignalGlobal.enemyHealthDepleted.connect(enemyHealthDepleted)
 	SignalGlobal.enemyReachedExit.connect(enemyReachedExit.bind())
 	
-	var waveResource = load("res://World/Waves/wave_" + str(currentWave) + ".tscn")
+#	var waveResource = load("res://World/Waves/wave_" + str(currentWave) + ".tscn")
+#	wave = waveResource.instantiate()
+#	add_child(wave)
+#	wave.setEnemyPath(path)
+#	wave.start_wave()
+#	wave.waveOver.connect(waveOver)
+
+	var waveResource = load("res://World/Waves/wave_1_test.tscn")
 	wave = waveResource.instantiate()
 	add_child(wave)
 	wave.setEnemyPath(path)
@@ -75,7 +82,7 @@ func enemyReachedExit(damage: int):
 func waveOver():
 	print_debug("Wave %d over" % currentWave)
 	wave.queue_free()
-	nextWave()
+#	nextWave()
 	
 func nextWave():
 	currentWave += 1

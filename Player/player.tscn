@@ -456,7 +456,6 @@ hitboxComponent = NodePath("Weapon Sprite/HitboxComponent")
 attackComponent = NodePath("AttackComponent")
 
 [node name="Weapon Sprite" type="Sprite2D" parent="WeaponComponent"]
-visible = false
 y_sort_enabled = true
 position = Vector2(80, 0)
 scale = Vector2(4, 4)

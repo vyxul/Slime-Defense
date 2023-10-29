@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://ddnsog6damt11"]
 
-[ext_resource type="Script" path="res://Towers/projectile.gd" id="1_mda1b"]
+[ext_resource type="Script" path="res://Components/Projectiles/projectile.gd" id="1_mda1b"]
 [ext_resource type="Texture2D" uid="uid://j33jous42tit" path="res://Assets/Art/Weapons/Shuriken/shuriken.png" id="2_66uco"]
 [ext_resource type="PackedScene" uid="uid://btdv6ffutib13" path="res://Components/hitbox_component.tscn" id="3_e50nb"]
 [ext_resource type="Script" path="res://Components/attack_component.gd" id="4_lr531"]
