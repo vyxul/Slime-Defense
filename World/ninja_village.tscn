@@ -8676,16 +8676,11 @@ position = Vector2(2039, 1520)
 
 [node name="NinjaBaseTower" parent="." instance=ExtResource("9_gagus")]
 position = Vector2(1530, 1105)
-attackCooldown = 0.5
 projectileSpeed = 1000
-projectileDamage = 2
-projectilePierce = 3
 
 [node name="SamuraiTower" parent="." instance=ExtResource("10_xneon")]
-position = Vector2(934, 1103)
-attackCooldown = 0.1
+position = Vector2(739, 1088)
 projectileSpeed = 1000
-projectileDamage = 2
 
 [node name="MapBounds" type="Area2D" parent="."]
 visible = false

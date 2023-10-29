@@ -5,7 +5,7 @@
 [node name="Wave_1" type="Node2D"]
 script = ExtResource("1_wa00q")
 enemySpawnList = Array[String](["res://Enemies/blue_slime_enemy.tscn", "res://Enemies/green_slime_enemy.tscn", "res://Enemies/yellow_slime_enemy.tscn"])
-enemySpawnCount = Array[int]([20, 20, 20])
-enemySpawnInterval = 0.5
+enemySpawnCount = Array[int]([40, 40, 40])
+enemySpawnInterval = 0.3
 
 [node name="Timer" type="Timer" parent="."]

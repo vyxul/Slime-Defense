@@ -80,6 +80,22 @@ func _input(event):
 		var towerNode = tower.instantiate()
 		towerNode.position = get_global_mouse_position()
 		add_child(towerNode)
+		
+	if event.is_action_pressed("scroll_down"):
+		var currentZoom: Vector2 = camera.get_zoom()
+		if currentZoom <= Vector2(.5, .5):
+			return
+			
+		var newZoom: Vector2 = currentZoom - Vector2(.1, .1)
+		camera.set_zoom(newZoom)
+		
+	if event.is_action_pressed("scroll_up"):
+		var currentZoom: Vector2 = camera.get_zoom()
+		if currentZoom >= Vector2(2, 2):
+			return
+			
+		var newZoom: Vector2 = currentZoom + Vector2(.1, .1)
+		camera.set_zoom(newZoom)
 
 func enemyHealthDepleted():
 #	print_debug("enemy died")

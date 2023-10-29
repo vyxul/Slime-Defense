@@ -131,6 +131,8 @@ func _ready():
 # Used to help towers know which enemy in range is furthest or slowest in path
 func setPathProgress(num: float):
 	pathProgress = num
+func getPathProgress() -> float:
+	return pathProgress
 
 # Set up the health and attack components
 func setupStats():

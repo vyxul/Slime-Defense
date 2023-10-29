@@ -17,7 +17,7 @@ var projectileScene: PackedScene
 
 # Variables for tower mechanics
 var isAttacking: bool = false
-var currentEnemy = null
+var currentEnemy: Node = null
 var enemiesInRange: Array = []
 
 # Variables for tower/projectile stats
@@ -26,6 +26,9 @@ var enemiesInRange: Array = []
 @export var projectileSpeed: int = 100
 @export var projectileDamage: int = 1
 @export var projectilePierce: int = 1
+
+enum targetPriorityState {FIRST, LAST, FASTEST, SLOWEST, TANKIEST, STRONGEST}
+var targetPriority: targetPriorityState
 
 # Collision Layer/Mask shouldn't change unless they are changed in project settings
 # 4 is for tower
@@ -42,6 +45,10 @@ func _ready():
 	towerRange          = $Area2D
 	towerRangeShape     = $Area2D/CollisionShape2D
 	attackTimer         = $Timer
+	
+	# Setting target priority to FIRST for now
+	targetPriority = targetPriorityState.FIRST
+	print_debug("targetPriority: %s" % str(targetPriority))
 	
 	# Check to see if all needed nodes for a tower is added correctly
 	if !baseSprite:
@@ -125,14 +132,14 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if !isCorrectlySetup:
-		print_debug("%s tower is not correctly set up" % name)
+#		print_debug("%s tower is not correctly set up" % name)
 		return
 		
 	if (enemiesInRange.is_empty()):
 		return
 		
 	# Default is to get the enemy closest to the exit
-	currentEnemy = enemiesInRange[0]
+	currentEnemy = getCurrentEnemy()
 	topLookAt(currentEnemy.global_position)
 
 	if !isAttacking:
@@ -144,7 +151,7 @@ func _on_area_2d_area_entered(area):
 #				[name, area.get_parent().name, area.name])
 
 	if area is HurtboxComponent:
-		enemiesInRange.append(area)
+		enemiesInRange.append(area.get_parent())
 		
 # When enemy exits range of the tower, remove them from the list of enemies in range
 func _on_area_2d_area_exited(area):
@@ -152,7 +159,7 @@ func _on_area_2d_area_exited(area):
 #				[name, area.get_parent().name, area.name])
 	
 	if area is HurtboxComponent:
-		enemiesInRange.erase(area)
+		enemiesInRange.erase(area.get_parent())
 
 # On attackTimer timeout, let tower know that it is available to attack again
 func _on_timer_timeout():
@@ -176,6 +183,38 @@ func topLookAt(enemyPosition: Vector2):
 	# Look left
 	else: 
 		topSprite.frame = 2
+
+func getCurrentEnemy() -> Node:
+	var currentEnemy: Node = null
+	
+	# Get the target priority, implementing just FIRST for now
+	if targetPriority == targetPriorityState.FIRST:
+		currentEnemy = getFirstEnemy()
+	
+#	if !currentEnemy:
+#		currentEnemy = enemiesInRange[0]
+	
+	return currentEnemy
+
+func getFirstEnemy() -> Node:
+	var firstEnemy: Node = null
+	
+	# Set up variables to find furthest enemy
+	var furthestIndex: int = 0
+	var furthestProgress: float = 0
+	
+	# Find the furthest enemy
+	for index in range(enemiesInRange.size()):
+		var enemy = enemiesInRange[index]
+		var enemyProgress: float = enemy.getPathProgress()
+		if (enemyProgress > furthestProgress):
+			furthestIndex = index
+			furthestProgress = enemyProgress
+	
+	# Assign the furthest enemy
+	firstEnemy = enemiesInRange[furthestIndex]
+	
+	return firstEnemy
 
 # Controls how the tower attacks the enemy
 func attack(enemyPosition: Vector2):
